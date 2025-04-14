@@ -1,4 +1,4 @@
-const API_URL = "/api/movies"; // Vercel proxy
+const API_URL = "/api/movies";
 const DEFAULT_POSTER = "assets/NoPoster.jpg";
 
 const elements = {
@@ -176,10 +176,11 @@ async function getGenres() {
 
 function filterByGenre() {
     let genreId = elements.genreSelect.value;
-    let endpoint = genreId ? `/discover/movie&with_genres=${genreId}` : "/movie/popular";
+    let endpoint = genreId ? `/discover/movie` : "/movie/popular";
+    let query = genreId ? `with_genres=${genreId}` : "";
     state.currentUrl = endpoint;
     state.isViewingFavorites = false;
-    getMovies(endpoint, 1, true);
+    getMovies(endpoint, 1, true, query);
 }
 
 function toggleFavorite(id, title, posterUrl, releaseDate, voteAverage, btn) {
@@ -334,7 +335,6 @@ elements.showFavButton.addEventListener("click", () => {
     showFavorites(1);
 });
 
-
 elements.movieName.addEventListener("input", debounce(() => {
     if (elements.movieName.value.trim()) {
         searchMovies(new Event("click"));
@@ -345,7 +345,7 @@ elements.genreSelect.addEventListener("change", filterByGenre);
 
 document.addEventListener("DOMContentLoaded", () => {
     if (!elements.movieContainer || !elements.genreSelect) {
-        console.error("Không tìm thấy movieContainer, genreSelect trong DOM!");
+        console.error("Không tìm thấy movieContainer hoặc genreSelect trong DOM!");
         return;
     }
     let popularMoviesEndpoint = "/movie/popular";
