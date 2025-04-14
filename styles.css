@@ -59,19 +59,6 @@ body {
     outline: 2px solid var(--primary-color);
 }
 
-.search-container button {
-    padding: 8px 15px;
-    font-size: 16px;
-    cursor: pointer;
-    border-radius: var(--border-radius);
-    background: var(--primary-color);
-    color: white;
-    border: none;
-}
-.search-container button:focus {
-    outline: 2px solid var(--secondary-color);
-}
-
 #genreFilterWrapper {
     margin-top: 16px;
 }
@@ -343,7 +330,6 @@ body {
 }
 
 /* Touch feedback */
-.search-container button:active,
 .fav-btn:active,
 .pagination button:active {
     background: var(--primary-color);

@@ -16,8 +16,7 @@ const elements = {
     detailRating: document.getElementById("detailRating"),
     detailGenres: document.getElementById("detailGenres"),
     detailCast: document.getElementById("detailCast"),
-    detailTrailer: document.getElementById("detailTrailer"),
-    searchButton: document.getElementById("searchButton")
+    detailTrailer: document.getElementById("detailTrailer")
 };
 
 const state = {
@@ -335,7 +334,6 @@ elements.showFavButton.addEventListener("click", () => {
     showFavorites(1);
 });
 
-elements.searchButton.addEventListener("click", searchMovies);
 
 elements.movieName.addEventListener("input", debounce(() => {
     if (elements.movieName.value.trim()) {
@@ -346,8 +344,8 @@ elements.movieName.addEventListener("input", debounce(() => {
 elements.genreSelect.addEventListener("change", filterByGenre);
 
 document.addEventListener("DOMContentLoaded", () => {
-    if (!elements.movieContainer || !elements.genreSelect || !elements.searchButton) {
-        console.error("Không tìm thấy movieContainer, genreSelect hoặc searchButton trong DOM!");
+    if (!elements.movieContainer || !elements.genreSelect) {
+        console.error("Không tìm thấy movieContainer, genreSelect trong DOM!");
         return;
     }
     let popularMoviesEndpoint = "/movie/popular";
