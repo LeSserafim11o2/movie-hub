@@ -29,15 +29,18 @@ const state = {
 
 const cache = new Map();
 
-async function getMovies(endpoint, page = 1, bypassCache = false) {
+async function getMovies(endpoint, page = 1, bypassCache = false, query = "") {
     elements.movieContainer.innerHTML = '<div class="loading-spinner active"><div class="spinner"></div></div>';
-    const cacheKey = `${endpoint}&page=${page}`;
+    const cacheKey = `${endpoint}&page=${page}${query ? `&${query}` : ""}`;
     if (!bypassCache && cache.has(cacheKey)) {
         renderMovies(cache.get(cacheKey));
         return;
     }
     try {
-        const response = await fetch(`${API_URL}?endpoint=${endpoint}&page=${page}`);
+        const url = query
+            ? `${API_URL}?endpoint=${encodeURIComponent(endpoint)}&page=${page}&query=${encodeURIComponent(query)}`
+            : `${API_URL}?endpoint=${encodeURIComponent(endpoint)}&page=${page}`;
+        const response = await fetch(url);
         if (!response.ok) throw new Error("Không thể kết nối đến API!");
         const data = await response.json();
         cache.set(cacheKey, data);
@@ -93,11 +96,12 @@ function searchMovies(e) {
         alert("Vui lòng nhập tên phim!");
         return;
     }
-    let searchEndpoint = `/search/movie&query=${encodeURIComponent(movieName)}`;
+    let searchEndpoint = `/search/movie`;
+    let searchQuery = `query=${encodeURIComponent(movieName)}`;
     state.currentUrl = searchEndpoint;
     state.isViewingFavorites = false;
     state.currentPage = 1;
-    getMovies(searchEndpoint, 1);
+    getMovies(searchEndpoint, 1, false, searchQuery);
     saveSearch(movieName);
 }
 
