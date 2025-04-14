@@ -1,5 +1,5 @@
 const API_URL = "/api/movies"; // Vercel proxy
-const DEFAULT_POSTER = "https://via.placeholder.com/400x600?text=No+Poster+Available";
+const DEFAULT_POSTER = "assets/NoPoster.jpg";
 
 const elements = {
     movieContainer: document.getElementById("movieContainer"),
