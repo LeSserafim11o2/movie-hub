@@ -1,0 +1,369 @@
+:root {
+    --primary-color: crimson;
+    --secondary-color: wheat;
+    --bg-dark: #222;
+    --card-bg: #333;
+    --text-light: #ddd;
+    --border-radius: 10px;
+    --transition: all 0.3s ease;
+}
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+::-webkit-scrollbar {
+    display: none;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    padding: 80px 20px 20px;
+    background: var(--bg-dark);
+    color: var(--text-light);
+}
+
+#logo {
+    position: fixed;
+    left: 25px;
+    top: 25px;
+    z-index: 1000;
+    cursor: pointer;
+}
+
+.search-container {
+    max-width: 600px;
+    width: 90%;
+    margin: 12px auto 0;
+    background: var(--secondary-color);
+    padding: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.search-container input {
+    padding: 10px 15px;
+    width: 100%;
+    max-width: 350px;
+    font-size: 16px;
+    border-radius: var(--border-radius);
+    border: none;
+    outline: none;
+}
+.search-container input:focus {
+    outline: 2px solid var(--primary-color);
+}
+
+.search-container button {
+    padding: 8px 15px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: var(--border-radius);
+    background: var(--primary-color);
+    color: white;
+    border: none;
+}
+.search-container button:focus {
+    outline: 2px solid var(--secondary-color);
+}
+
+#genreFilterWrapper {
+    margin-top: 16px;
+}
+
+#genreSelect {
+    padding: 10px 15px;
+    font-size: 16px;
+    border-radius: var(--border-radius);
+    border: 2px solid var(--primary-color);
+    background: white;
+    color: #333;
+}
+#genreSelect:focus {
+    outline: 2px solid var(--primary-color);
+}
+
+.movie-container {
+    margin-top: 20px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 250px)); /* Giới hạn max 250px */
+    gap: 15px;
+    justify-content: center; /* Căn giữa grid */
+    max-width: 1200px; /* Giới hạn chiều rộng container */
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.movie-container .movie-card {
+    background: var(--card-bg);
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    transition: transform 0.3s ease;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    width: 100%; /* Đảm bảo card tôn trọng grid */
+    max-width: 250px; /* Giới hạn chiều rộng card */
+}
+
+.movie-container .movie-card:hover {
+    transform: scale(1.05);
+}
+
+.movie-container .movie-card img {
+    width: 100%;
+    height: 400px;
+    object-fit: cover;
+    display: block;
+}
+
+.movie-container .movie-card .movie-info {
+    padding: 15px;
+    text-align: left;
+}
+
+.movie-info h3 {
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+.movie-info p {
+    font-size: 16px;
+    color: var(--text-light);
+    margin: 5px 0;
+}
+
+.movie-detail {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.5s ease;
+}
+
+.movie-detail.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+.movie-detail .detail-content {
+    background: var(--card-bg);
+    padding: 20px;
+    border-radius: var(--border-radius);
+    width: 90%;
+    max-height: 90vh;
+    overflow: auto;
+    color: var(--text-light);
+    display: flex;
+    gap: 25px;
+}
+
+.movie-detail .detail-content-left {
+    width: 40%;
+}
+
+.movie-detail .detail-content-right {
+    width: 60%;
+}
+
+.movie-detail .detail-content-left img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: var(--border-radius);
+}
+
+.movie-detail .close-btn {
+    position: absolute;
+    top: 20px;
+    right: 25px;
+    font-size: 24px;
+    cursor: pointer;
+    color: var(--primary-color);
+    background: white;
+    padding: 4px 12px;
+    border-radius: var(--border-radius);
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.movie-detail .close-btn:hover {
+    background: var(--secondary-color);
+    color: tomato;
+}
+
+.movie-detail .detail-content-right h2 {
+    margin-bottom: 12px;
+    font-size: 22px;
+    font-style: italic;
+}
+
+.movie-detail .detail-content-right p {
+    margin-bottom: 10px;
+    font-size: 18px;
+    line-height: 1.6;
+}
+
+.movie-detail .cast-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin: 10px 0 15px;
+}
+
+.movie-detail .cast-list span {
+    background: #555;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+.movie-detail .trailer-wrapper {
+    position: relative;
+    padding-bottom: 56.25%;
+    height: 0;
+}
+
+.movie-detail .trailer-wrapper iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: var(--border-radius);
+}
+
+.show-fav-button {
+    border: 2px outset gold;
+    font-size: 16px;
+    padding: 10px 12px;
+    margin-top: 15px;
+    background: none;
+    color: var(--text-light);
+    cursor: pointer;
+}
+
+.fav-btn {
+    font-size: 24px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+
+.fav-btn:hover {
+    transform: scale(1.3);
+}
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 20px;
+}
+
+.pagination button {
+    padding: 6px 12px;
+    border: none;
+    background: #eee;
+    cursor: pointer;
+    border-radius: 4px;
+    font-weight: bold;
+}
+
+.pagination button:hover {
+    background: var(--primary-color);
+    color: white;
+}
+
+.pagination button.active {
+    background: var(--primary-color);
+    color: white;
+}
+
+.loading-spinner {
+    display: none;
+    text-align: center;
+    font-size: 1.2em;
+    color: var(--text-light);
+}
+.loading-spinner.active {
+    display: block;
+}
+.spinner {
+    border: 4px solid rgba(255, 255, 255, 0.3);
+    border-top: 4px solid var(--primary-color);
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    animation: spin 1s linear infinite;
+    margin: 0 auto;
+}
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* Mobile rất nhỏ */
+@media (max-width: 360px) {
+    .movie-container {
+        grid-template-columns: repeat(auto-fit, minmax(160px, 250px));
+    }
+    .movie-info h3 {
+        font-size: 18px;
+    }
+    .movie-info p {
+        font-size: 14px;
+    }
+}
+
+/* Overlay trên mobile ngang */
+@media (max-width: 768px) and (orientation: landscape) {
+    .movie-detail .detail-content {
+        flex-direction: row;
+        width: 90%;
+    }
+    .movie-detail .detail-content-left,
+    .movie-detail .detail-content-right {
+        width: 50%;
+    }
+    .movie-detail .detail-content-left img {
+        max-height: 300px;
+    }
+}
+
+/* Touch feedback */
+.search-container button:active,
+.fav-btn:active,
+.pagination button:active {
+    background: var(--primary-color);
+    color: white;
+    transform: scale(0.95);
+}
+
+@media (max-width: 768px) {
+    .movie-detail .detail-content {
+        flex-direction: column;
+        width: 95%;
+    }
+    .movie-detail .detail-content-left,
+    .movie-detail .detail-content-right {
+        width: 100%;
+    }
+    .movie-detail .detail-content-left img {
+        max-height: 400px;
+    }
+    .movie-container {
+        grid-template-columns: repeat(auto-fit, minmax(180px, 250px)); /* Điều chỉnh cho mobile */
+    }
+}

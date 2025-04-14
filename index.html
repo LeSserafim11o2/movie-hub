@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="MovieHub - Tìm kiếm và khám phá thông tin về các bộ phim yêu thích của bạn.">
+    <title>Movie Cards 🎬</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <h1 id="logo" class="logo">🎬 MovieHub</h1>
+    <h2>Danh sách phim</h2>
+    <div class="search-container">
+        <input type="text" id="movieName" placeholder="Nhập tên phim..." aria-label="Tìm kiếm phim">
+        <button id="searchButton" aria-label="Tìm kiếm phim">🔍</button>
+    </div>
+    <button id="showFavorites" class="show-fav-button">📁 Xem danh sách yêu thích</button>
+    <div id="genreFilterWrapper">
+        <select id="genreSelect" aria-label="Lọc theo thể loại">
+            <option value="">🎭 Tất cả thể loại</option>
+        </select>
+    </div>
+    <div id="loading" class="loading-spinner"><div class="spinner"></div></div>
+    <div class="movie-container" id="movieContainer"></div>
+    <div id="pagination" class="pagination"></div>
+    <div class="movie-detail" id="movieDetail" onclick="onOverlayClick(event)">
+        <button class="close-btn" onclick="closeDetail()" aria-label="Đóng chi tiết phim">x</button>
+        <div class="detail-content">
+            <div class="detail-content-left">
+                <img id="detailPoster" src="" alt="Poster phim">
+            </div>
+            <div class="detail-content-right">
+                <h2 id="detailTitle"></h2>
+                <p id="detailOverview"></p>
+                <p><strong>📅 Ngày phát hành:</strong> <span id="detailDate"></span></p>
+                <p><strong>⭐ Điểm IMDb:</strong> <span id="detailRating"></span>/10</p>
+                <p><strong>🎭 Thể loại:</strong> <span id="detailGenres"></span></p>
+                <p><strong>👥 Diễn viên chính:</strong></p>
+                <div class="cast-list" id="detailCast"></div>
+                <p><strong>🎥 Trailer:</strong></p>
+                <div id="detailTrailer" class="trailer-wrapper"></div>
+            </div>
+        </div>
+    </div>
+    <script defer src="index.js"></script>
+</body>
+</html>
